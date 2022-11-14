@@ -1,0 +1,356 @@
+classdef analysissoftware < matlab.apps.AppBase
+
+    % Properties that correspond to app components
+    properties (Access = public)
+        UIFigure                     matlab.ui.Figure
+        Image                        matlab.ui.control.Image
+        DeveloperBradleyNewellLabel  matlab.ui.control.Label
+        DirisA40EnergyMeteringAnalysisSystemLabel  matlab.ui.control.Label
+        OperatorInterfacePanel       matlab.ui.container.Panel
+        VariabletoPlotDropDown       matlab.ui.control.DropDown
+        VariabletoPlotDropDownLabel  matlab.ui.control.Label
+        LoadTestDropDown             matlab.ui.control.DropDown
+        LoadTestDropDownLabel        matlab.ui.control.Label
+        InstructionsLabel            matlab.ui.control.Label
+        ClearButton                  matlab.ui.control.Button
+        PlotButton                   matlab.ui.control.Button
+        HoldButton                   matlab.ui.control.Button
+        AxesTitleEditFieldLabel      matlab.ui.control.Label
+        AxesTitleEditField           matlab.ui.control.EditField
+        UIAxes                       matlab.ui.control.UIAxes
+    end
+
+    % Callbacks that handle component events
+    methods (Access = private)
+
+        % Button pushed function: PlotButton
+        function PlotButtonPushed(app, event)
+%load variables from chosen file in drop down menu
+load(app.LoadTestDropDown.Value,'t')
+load(app.LoadTestDropDown.Value,'P1P3')
+load(app.LoadTestDropDown.Value,'P2P3')
+load(app.LoadTestDropDown.Value,'P1P2')
+load(app.LoadTestDropDown.Value,'ActiveP')
+load(app.LoadTestDropDown.Value,'ApparentP')
+load(app.LoadTestDropDown.Value,'F')
+load(app.LoadTestDropDown.Value,'ITHDL1')
+load(app.LoadTestDropDown.Value,'ITHDL2')
+load(app.LoadTestDropDown.Value,'ITHDL3')
+load(app.LoadTestDropDown.Value,'L1Current')
+load(app.LoadTestDropDown.Value,'L2Current')
+load(app.LoadTestDropDown.Value,'L3Current')
+load(app.LoadTestDropDown.Value,'PFL1')
+load(app.LoadTestDropDown.Value,'PFL2')
+load(app.LoadTestDropDown.Value,'PFL3')
+load(app.LoadTestDropDown.Value,'PNL1')
+load(app.LoadTestDropDown.Value,'PNL2')
+load(app.LoadTestDropDown.Value,'PNL3')
+load(app.LoadTestDropDown.Value,'ReactiveP')
+load(app.LoadTestDropDown.Value,'VTHDL1')
+load(app.LoadTestDropDown.Value,'VTHDL2')
+load(app.LoadTestDropDown.Value,'VTHDL3')
+
+legend(app.UIAxes)
+
+%plot the chosen variable in the second drop down menu case by case
+%When drop down switched
+switch app.VariabletoPlotDropDown.Value
+    %1st case
+                case 'Current L1'
+                    %Plot on axes against time
+                    L1A=L1Current/1000;
+                         plot(app.UIAxes,t,L1A,'DisplayName',app.LoadTestDropDown.Value)
+                    %Label y axes
+                         ylabel(app.UIAxes,'Current (Amps)')
+                         
+                    case 'Current L2'
+                        L2A=L2Current/1000;
+                         plot(app.UIAxes,t,L2A,'DisplayName',app.LoadTestDropDown.Value)
+                         ylabel(app.UIAxes,'Current (Amps)')
+                       
+                    case 'Current L3'
+                        L3A=L3Current/1000;
+                         plot(app.UIAxes,t,L3A,'DisplayName',app.LoadTestDropDown.Value)
+                         ylabel(app.UIAxes,'Current (Amps)')
+                          
+                       case 'Voltage L1-L2' 
+                           VP1P2=P1P2/10;
+                         plot(app.UIAxes,t,VP1P2,'DisplayName',app.LoadTestDropDown.Value)
+                         ylabel(app.UIAxes,'Voltage (Volts)')
+                          
+                          case 'Voltage L2-L3'
+                              VP2P3=P2P3/10;
+                         plot(app.UIAxes,t,VP2P3,'DisplayName',app.LoadTestDropDown.Value)
+                         ylabel(app.UIAxes,'Voltage (Volts)')
+                        
+
+                          case 'Voltage L1-L3'
+                              VP1P3=P1P3/10;
+                         plot(app.UIAxes,t,VP1P3,'DisplayName',app.LoadTestDropDown.Value)
+                         ylabel(app.UIAxes,'Voltage (Volts)')
+                         
+
+                          case 'Voltage L1-N'
+                              VPNL1=PNL1/10;
+                         plot(app.UIAxes,t,VPNL1,'DisplayName',app.LoadTestDropDown.Value)
+                         ylabel(app.UIAxes,'Voltage (Volts)')
+                       
+                          
+                          case 'Voltage L2-N'
+                              VPNL2=PNL2/10;
+                         plot(app.UIAxes,t,VPNL2,'DisplayName',app.LoadTestDropDown.Value)
+                         ylabel(app.UIAxes,'Voltage (Volts)')
+                          
+
+                          case 'Voltage L3-N'
+                              VPNL3=PNL3/10;
+                         plot(app.UIAxes,t,VPNL3,'DisplayName',app.LoadTestDropDown.Value)
+                         ylabel(app.UIAxes,'Voltage (Volts)')
+                       
+         
+                         case 'Frequency'
+                             Fr=F/100;
+                         plot(app.UIAxes,t,Fr,'DisplayName',app.LoadTestDropDown.Value)
+                         ylabel(app.UIAxes,'Hertz (Hz)')
+                       
+
+                         case 'Active Power'
+                         plot(app.UIAxes,t,ActiveP,'DisplayName',app.LoadTestDropDown.Value)
+                         ylabel(app.UIAxes,'kW')
+                         
+                         case 'Reactive Power'
+                         plot(app.UIAxes,t,ReactiveP,'DisplayName',app.LoadTestDropDown.Value)
+                         ylabel(app.UIAxes,'Kvar')
+ 
+                         case 'Apparent Power'
+                         plot(app.UIAxes,t,ApparentP,'DisplayName',app.LoadTestDropDown.Value)
+                         ylabel(app.UIAxes,'KvA')
+                         
+
+                         case 'Power Factor L1'
+                             PF1=PFL1/1000;
+                         plot(app.UIAxes,t,PF1,'DisplayName',app.LoadTestDropDown.Value)
+
+                         case'Power Factor L2'
+                             PF2=PFL2/1000;
+                         plot(app.UIAxes,t,PF2,'DisplayName',app.LoadTestDropDown.Value)
+                         
+                         case 'Power Factor L3'
+                             PF3=PFL3/1000;
+                         plot(app.UIAxes,t,PF3,'DisplayName',app.LoadTestDropDown.Value)
+                          ylabel(app.UIAxes,'%')
+
+                         case 'Current THD L1'
+                             ITHD1=ITHDL1/10;
+                         plot(app.UIAxes,t,ITHD1,'DisplayName',app.LoadTestDropDown.Value)
+                         ylabel(app.UIAxes,'%')
+                         
+
+                        case 'Current THD L2'
+                            ITHD2=ITHDL2/10;
+                         plot(app.UIAxes,t,ITHD2,'DisplayName',app.LoadTestDropDown.Value)
+                         ylabel(app.UIAxes,'%')
+                         
+
+                            case 'Current THD L3'
+                                ITHD3=ITHDL3/10;
+                         plot(app.UIAxes,t,ITHD3,'DisplayName',app.LoadTestDropDown.Value)
+                         ylabel(app.UIAxes,'%')
+                     
+
+                       case 'Voltage THD L1'
+                           VTHD1=VTHDL1/10;
+                         plot(app.UIAxes,t,VTHD1,'DisplayName',app.LoadTestDropDown.Value)
+                         ylabel(app.UIAxes,'%')
+                          
+
+                          case 'Voltage THD L2'
+                              VTHD2=VTHDL2/10;
+                         plot(app.UIAxes,t,VTHD2,'DisplayName',app.LoadTestDropDown.Value)
+                         ylabel(app.UIAxes,'%')
+                          
+        
+                          case 'Voltage THD L3'
+                              VTHD3=VTHDL3/10;
+                         plot(app.UIAxes,t,VTHD3,'DisplayName',app.LoadTestDropDown.Value)
+                         ylabel(app.UIAxes,'%')
+                          
+     
+end 
+
+ title(app.UIAxes,app.AxesTitleEditField.Value)
+        end
+
+        % Button pushed function: ClearButton
+        function ClearButtonPushed(app, event)
+hold(app.UIAxes,'off')
+        end
+
+        % Button pushed function: HoldButton
+        function HoldButtonPushed(app, event)
+            hold(app.UIAxes,'on')
+        end
+    end
+
+    % Component initialization
+    methods (Access = private)
+
+        % Create UIFigure and components
+        function createComponents(app)
+
+            % Create UIFigure and hide until all components are created
+            app.UIFigure = uifigure('Visible', 'off');
+            app.UIFigure.Color = [1 1 1];
+            app.UIFigure.Position = [100 100 917 482];
+            app.UIFigure.Name = 'MATLAB App';
+
+            % Create Image
+            app.Image = uiimage(app.UIFigure);
+            app.Image.Position = [643 419 336 64];
+            app.Image.ImageSource = 'sellafield image.png';
+
+            % Create DeveloperBradleyNewellLabel
+            app.DeveloperBradleyNewellLabel = uilabel(app.UIFigure);
+            app.DeveloperBradleyNewellLabel.FontWeight = 'bold';
+            app.DeveloperBradleyNewellLabel.Position = [695 1 156 22];
+            app.DeveloperBradleyNewellLabel.Text = 'Developer: Bradley Newell';
+
+            % Create DirisA40EnergyMeteringAnalysisSystemLabel
+            app.DirisA40EnergyMeteringAnalysisSystemLabel = uilabel(app.UIFigure);
+            app.DirisA40EnergyMeteringAnalysisSystemLabel.FontSize = 20;
+            app.DirisA40EnergyMeteringAnalysisSystemLabel.FontWeight = 'bold';
+            app.DirisA40EnergyMeteringAnalysisSystemLabel.FontColor = [0.149 0.149 0.149];
+            app.DirisA40EnergyMeteringAnalysisSystemLabel.Position = [102 450 426 24];
+            app.DirisA40EnergyMeteringAnalysisSystemLabel.Text = 'Diris A40 Energy Metering Analysis System';
+
+            % Create OperatorInterfacePanel
+            app.OperatorInterfacePanel = uipanel(app.UIFigure);
+            app.OperatorInterfacePanel.Title = 'Operator Interface';
+            app.OperatorInterfacePanel.FontWeight = 'bold';
+            app.OperatorInterfacePanel.Position = [642 34 263 389];
+
+            % Create VariabletoPlotDropDown
+            app.VariabletoPlotDropDown = uidropdown(app.OperatorInterfacePanel);
+            app.VariabletoPlotDropDown.Items = {'Current L1', 'Current L2', 'Current L3', 'Voltage L1-L2', 'Voltage L2-L3', 'Voltage L1-L3', 'Voltage L1-N', 'Voltage L2-N', 'Voltage L3-N', 'Frequency', 'Active Power', 'Reactive Power', 'Apparent Power', 'Power Factor L1', 'Power Factor L2', 'Power Factor L3', 'Current THD L1', 'Current THD L2', 'Current THD L3', 'Voltage THD L1', 'Voltage THD L2', 'Voltage THD L3'};
+            app.VariabletoPlotDropDown.FontWeight = 'bold';
+            app.VariabletoPlotDropDown.FontColor = [0.149 0.149 0.149];
+            app.VariabletoPlotDropDown.BackgroundColor = [0.902 0.902 0.902];
+            app.VariabletoPlotDropDown.Position = [142 143 100 22];
+            app.VariabletoPlotDropDown.Value = 'Current L1';
+
+            % Create VariabletoPlotDropDownLabel
+            app.VariabletoPlotDropDownLabel = uilabel(app.OperatorInterfacePanel);
+            app.VariabletoPlotDropDownLabel.HorizontalAlignment = 'right';
+            app.VariabletoPlotDropDownLabel.FontWeight = 'bold';
+            app.VariabletoPlotDropDownLabel.FontColor = [0.149 0.149 0.149];
+            app.VariabletoPlotDropDownLabel.Position = [35 143 92 22];
+            app.VariabletoPlotDropDownLabel.Text = 'Variable to Plot';
+
+            % Create LoadTestDropDown
+            app.LoadTestDropDown = uidropdown(app.OperatorInterfacePanel);
+            app.LoadTestDropDown.Items = {'5GHz0m', '2-4GHz0m', '5GHz20m', '2-4GHz20m', '5GHz40mOutside', '5GHz40mExtenderInside', '2-4GHz40mOutside', '2-4GHz40mExtenderInside', '5GHz60mOutside', '5GHz60mExtenderInside', '2-4GHz60mOutside', '2-4GHz60mExtenderInside', '5GHz80mOutside', '2-4GHz80mOutside', 'ChangesInLoad0m', '50mGInterference', '150mGInterference'};
+            app.LoadTestDropDown.FontWeight = 'bold';
+            app.LoadTestDropDown.FontColor = [0.149 0.149 0.149];
+            app.LoadTestDropDown.BackgroundColor = [0.902 0.902 0.902];
+            app.LoadTestDropDown.Position = [142 112 100 22];
+            app.LoadTestDropDown.Value = '5GHz0m';
+
+            % Create LoadTestDropDownLabel
+            app.LoadTestDropDownLabel = uilabel(app.OperatorInterfacePanel);
+            app.LoadTestDropDownLabel.HorizontalAlignment = 'right';
+            app.LoadTestDropDownLabel.FontWeight = 'bold';
+            app.LoadTestDropDownLabel.FontColor = [0.149 0.149 0.149];
+            app.LoadTestDropDownLabel.Position = [66 112 61 22];
+            app.LoadTestDropDownLabel.Text = 'Load Test';
+
+            % Create InstructionsLabel
+            app.InstructionsLabel = uilabel(app.OperatorInterfacePanel);
+            app.InstructionsLabel.BackgroundColor = [0.9412 0.9412 0.9412];
+            app.InstructionsLabel.WordWrap = 'on';
+            app.InstructionsLabel.FontWeight = 'bold';
+            app.InstructionsLabel.FontColor = [0 0.4471 0.7412];
+            app.InstructionsLabel.Position = [5 180 254 183];
+            app.InstructionsLabel.Text = {'Instructions:'; ''; '- Select desired variable to plot'; '- Select desired test:'; ''; 'Extender= Use of range extender'; 'Inside= Test executed inside NCfN'; 'Outside= Test executed outside NCfN'; 'Interference= Electromagnetic Interference'; ''; '- To plot multiple tests use hold function'};
+
+            % Create ClearButton
+            app.ClearButton = uibutton(app.OperatorInterfacePanel, 'push');
+            app.ClearButton.ButtonPushedFcn = createCallbackFcn(app, @ClearButtonPushed, true);
+            app.ClearButton.BackgroundColor = [0.902 0.902 0.902];
+            app.ClearButton.FontWeight = 'bold';
+            app.ClearButton.FontColor = [0.149 0.149 0.149];
+            app.ClearButton.Position = [28 9 214 22];
+            app.ClearButton.Text = 'Clear';
+
+            % Create PlotButton
+            app.PlotButton = uibutton(app.OperatorInterfacePanel, 'push');
+            app.PlotButton.ButtonPushedFcn = createCallbackFcn(app, @PlotButtonPushed, true);
+            app.PlotButton.BackgroundColor = [0.902 0.902 0.902];
+            app.PlotButton.FontWeight = 'bold';
+            app.PlotButton.FontColor = [0.149 0.149 0.149];
+            app.PlotButton.Position = [28 41 100 22];
+            app.PlotButton.Text = 'Plot';
+
+            % Create HoldButton
+            app.HoldButton = uibutton(app.OperatorInterfacePanel, 'push');
+            app.HoldButton.ButtonPushedFcn = createCallbackFcn(app, @HoldButtonPushed, true);
+            app.HoldButton.BackgroundColor = [0.902 0.902 0.902];
+            app.HoldButton.FontWeight = 'bold';
+            app.HoldButton.FontColor = [0.149 0.149 0.149];
+            app.HoldButton.Position = [142 41 100 22];
+            app.HoldButton.Text = 'Hold';
+
+            % Create AxesTitleEditFieldLabel
+            app.AxesTitleEditFieldLabel = uilabel(app.OperatorInterfacePanel);
+            app.AxesTitleEditFieldLabel.HorizontalAlignment = 'right';
+            app.AxesTitleEditFieldLabel.FontWeight = 'bold';
+            app.AxesTitleEditFieldLabel.Position = [65 82 62 22];
+            app.AxesTitleEditFieldLabel.Text = 'Axes Title';
+
+            % Create AxesTitleEditField
+            app.AxesTitleEditField = uieditfield(app.OperatorInterfacePanel, 'text');
+            app.AxesTitleEditField.FontWeight = 'bold';
+            app.AxesTitleEditField.BackgroundColor = [0.902 0.902 0.902];
+            app.AxesTitleEditField.Position = [142 82 100 22];
+
+            % Create UIAxes
+            app.UIAxes = uiaxes(app.UIFigure);
+            xlabel(app.UIAxes, 'Time (sec)')
+            zlabel(app.UIAxes, 'Z')
+            app.UIAxes.PlotBoxAspectRatio = [1.56756756756757 1 1];
+            app.UIAxes.XGrid = 'on';
+            app.UIAxes.XMinorGrid = 'on';
+            app.UIAxes.YGrid = 'on';
+            app.UIAxes.YMinorGrid = 'on';
+            app.UIAxes.MinorGridColor = [0.149 0.149 0.149];
+            app.UIAxes.Position = [1 16 628 425];
+
+            % Show the figure after all components are created
+            app.UIFigure.Visible = 'on';
+        end
+    end
+
+    % App creation and deletion
+    methods (Access = public)
+
+        % Construct app
+        function app = analysissoftware
+
+            % Create UIFigure and components
+            createComponents(app)
+
+            % Register the app with App Designer
+            registerApp(app, app.UIFigure)
+
+            if nargout == 0
+                clear app
+            end
+        end
+
+        % Code that executes before app deletion
+        function delete(app)
+
+            % Delete UIFigure when app is deleted
+            delete(app.UIFigure)
+        end
+    end
+end
