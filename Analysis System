@@ -57,122 +57,161 @@ legend(app.UIAxes)
 switch app.VariabletoPlotDropDown.Value
     %1st case
                 case 'Current L1'
-                    %Plot on axes against time
+                    %Plot on axes against time in correct units
                     L1A=L1Current/1000;
                          plot(app.UIAxes,t,L1A,'DisplayName',app.LoadTestDropDown.Value)
                     %Label y axes
                          ylabel(app.UIAxes,'Current (Amps)')
                          
                     case 'Current L2'
+                    %Plot on axes against time in correct units
                         L2A=L2Current/1000;
                          plot(app.UIAxes,t,L2A,'DisplayName',app.LoadTestDropDown.Value)
+                         %Label y axes
                          ylabel(app.UIAxes,'Current (Amps)')
                        
                     case 'Current L3'
+                    %Plot on axes against time in correct units
                         L3A=L3Current/1000;
                          plot(app.UIAxes,t,L3A,'DisplayName',app.LoadTestDropDown.Value)
+                         %Label y axes
                          ylabel(app.UIAxes,'Current (Amps)')
                           
                        case 'Voltage L1-L2' 
+                       %Plot on axes against time in correct units
                            VP1P2=P1P2/10;
                          plot(app.UIAxes,t,VP1P2,'DisplayName',app.LoadTestDropDown.Value)
+                         %Label y axes
                          ylabel(app.UIAxes,'Voltage (Volts)')
                           
                           case 'Voltage L2-L3'
+                          %Plot on axes against time in correct units
                               VP2P3=P2P3/10;
                          plot(app.UIAxes,t,VP2P3,'DisplayName',app.LoadTestDropDown.Value)
+                         %Label y axes
                          ylabel(app.UIAxes,'Voltage (Volts)')
                         
 
                           case 'Voltage L1-L3'
+                          %Plot on axes against time in correct units
                               VP1P3=P1P3/10;
                          plot(app.UIAxes,t,VP1P3,'DisplayName',app.LoadTestDropDown.Value)
+                         %Label y axes
                          ylabel(app.UIAxes,'Voltage (Volts)')
                          
 
                           case 'Voltage L1-N'
+                          %Plot on axes against time in correct units
                               VPNL1=PNL1/10;
                          plot(app.UIAxes,t,VPNL1,'DisplayName',app.LoadTestDropDown.Value)
+                         %Label y axes
                          ylabel(app.UIAxes,'Voltage (Volts)')
                        
                           
                           case 'Voltage L2-N'
+                          %Plot on axes against time in correct units
                               VPNL2=PNL2/10;
                          plot(app.UIAxes,t,VPNL2,'DisplayName',app.LoadTestDropDown.Value)
+                         %Label y axes
                          ylabel(app.UIAxes,'Voltage (Volts)')
                           
 
                           case 'Voltage L3-N'
+                          %Plot on axes against time in correct units
                               VPNL3=PNL3/10;
                          plot(app.UIAxes,t,VPNL3,'DisplayName',app.LoadTestDropDown.Value)
+                         %Label y axes
                          ylabel(app.UIAxes,'Voltage (Volts)')
                        
          
                          case 'Frequency'
+                         %Plot on axes against time in correct units
                              Fr=F/100;
                          plot(app.UIAxes,t,Fr,'DisplayName',app.LoadTestDropDown.Value)
+                         %Label y axes
                          ylabel(app.UIAxes,'Hertz (Hz)')
                        
 
                          case 'Active Power'
+                         %Plot on axes against time
                          plot(app.UIAxes,t,ActiveP,'DisplayName',app.LoadTestDropDown.Value)
+                         %Label y axes
                          ylabel(app.UIAxes,'kW')
                          
                          case 'Reactive Power'
+                         %Plot on axes against time
                          plot(app.UIAxes,t,ReactiveP,'DisplayName',app.LoadTestDropDown.Value)
+                         %Label y axes
                          ylabel(app.UIAxes,'Kvar')
  
                          case 'Apparent Power'
+                         %Plot on axes against time
                          plot(app.UIAxes,t,ApparentP,'DisplayName',app.LoadTestDropDown.Value)
+                         %Label y axes
                          ylabel(app.UIAxes,'KvA')
                          
 
                          case 'Power Factor L1'
+                         %Plot on axes against time in correct units
                              PF1=PFL1/1000;
                          plot(app.UIAxes,t,PF1,'DisplayName',app.LoadTestDropDown.Value)
 
                          case'Power Factor L2'
+                         %Plot on axes against time in correct units
                              PF2=PFL2/1000;
                          plot(app.UIAxes,t,PF2,'DisplayName',app.LoadTestDropDown.Value)
                          
                          case 'Power Factor L3'
+                         %Plot on axes against time in correct units
                              PF3=PFL3/1000;
                          plot(app.UIAxes,t,PF3,'DisplayName',app.LoadTestDropDown.Value)
-                          ylabel(app.UIAxes,'%')
+                         
 
                          case 'Current THD L1'
+                         %Plot on axes against time in correct units
                              ITHD1=ITHDL1/10;
                          plot(app.UIAxes,t,ITHD1,'DisplayName',app.LoadTestDropDown.Value)
+                         %Label y axes
                          ylabel(app.UIAxes,'%')
                          
 
                         case 'Current THD L2'
+                        %Plot on axes against time in correct units
                             ITHD2=ITHDL2/10;
                          plot(app.UIAxes,t,ITHD2,'DisplayName',app.LoadTestDropDown.Value)
+                         %Label y axes
                          ylabel(app.UIAxes,'%')
                          
 
                             case 'Current THD L3'
+                            %Plot on axes against time in correct units
                                 ITHD3=ITHDL3/10;
                          plot(app.UIAxes,t,ITHD3,'DisplayName',app.LoadTestDropDown.Value)
+                         %Label y axes
                          ylabel(app.UIAxes,'%')
                      
 
                        case 'Voltage THD L1'
+                       %Plot on axes against time in correct units
                            VTHD1=VTHDL1/10;
                          plot(app.UIAxes,t,VTHD1,'DisplayName',app.LoadTestDropDown.Value)
+                         %Label y axes
                          ylabel(app.UIAxes,'%')
                           
 
                           case 'Voltage THD L2'
+                          %Plot on axes against time in correct units
                               VTHD2=VTHDL2/10;
                          plot(app.UIAxes,t,VTHD2,'DisplayName',app.LoadTestDropDown.Value)
+                         %Label y axes
                          ylabel(app.UIAxes,'%')
                           
         
                           case 'Voltage THD L3'
+                          %Plot on axes against time in correct units
                               VTHD3=VTHDL3/10;
                          plot(app.UIAxes,t,VTHD3,'DisplayName',app.LoadTestDropDown.Value)
+                         %Label y axes
                          ylabel(app.UIAxes,'%')
                           
      
